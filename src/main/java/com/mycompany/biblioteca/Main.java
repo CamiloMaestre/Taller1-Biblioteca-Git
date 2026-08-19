@@ -108,8 +108,15 @@ public class Main {
             }
         }
     }
-    
 
+    public static Book findBook(String id) {
+        for (Book book : books) {
+            if (book.getCode().equals(id)) {
+                return book;
+            }
+        }
+        return null;
+    }
 
 
 
