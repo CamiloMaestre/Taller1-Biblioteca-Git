@@ -22,6 +22,23 @@ public class Main {
         clients.add(client);
     }
 
+    static void ListClients(){
+        System.out.println("Lista de clientes");
+        if(clients.isEmpty()){
+            System.out.println("No hay clientes registrados");
+        }
+        else{
+            for(Client client : clients){
+                System.out.println("ID: " + client.getId() +
+                                   ", Nombre: " + client.getName() +
+                                   ", Celular: " + client.getCellphone() +
+                                   ", Correo: " + client.getEmail());
+            }
+        }
+    }
+
+    
+
     public static void main(String[] args) {
 
     }
