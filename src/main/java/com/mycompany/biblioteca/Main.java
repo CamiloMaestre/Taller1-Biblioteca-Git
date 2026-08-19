@@ -7,6 +7,7 @@ public class Main {
 
     static ArrayList<Client> clients = new ArrayList<>();
     static Scanner sc = new Scanner(System.in);
+    static ArrayList<Book> books = new ArrayList<>();
 
     static void addClient() {
         System.out.println("Ingrese el ID del cliente:");
@@ -75,7 +76,78 @@ public class Main {
         }
     }
 
+    //Crud de libros
 
+    static void createBook() {
+        System.out.println("Ingrese el código del libro:");
+        String code = sc.nextLine();
+        System.out.println("Ingrese el título del libro:");
+        String title = sc.nextLine();
+        System.out.println("Ingrese el año del libro:");
+        String year = sc.nextLine();
+        System.out.println("Ingrese el autor del libro:");
+        String author = sc.nextLine();
+        System.out.println("Ingrese si el libro está disponible (true/false):");
+        boolean isAvailable = Boolean.parseBoolean(sc.nextLine());
+
+        Book book = new Book(code, title, year, author, isAvailable);
+        books.add(book);
+    }
+
+    static void listBooks() {
+        System.out.println("Lista de libros");
+        if (books.isEmpty()) {
+            System.out.println("No hay libros registrados");
+        } else {
+            for (Book book : books) {
+                System.out.println("Código: " + book.getCode() +
+                                   ", Título: " + book.getTitle() +
+                                   ", Año: " + book.getYear() +
+                                   ", Autor: " + book.getAuthor() +
+                                   ", Disponible: " + book.isAvailable());
+            }
+        }
+    }
+
+    public static Book findBook(String id) {
+        for (Book book : books) {
+            if (book.getCode().equals(id)) {
+                return book;
+            }
+        }
+        return null;
+    }
+
+    public static void updateBook(String id) {
+        Book book = findBook(id);
+        if (book != null) {
+            System.out.println("Ingrese el nuevo título del libro:");
+            String title = sc.nextLine();
+            System.out.println("Ingrese el nuevo año del libro:");
+            String year = sc.nextLine();
+            System.out.println("Ingrese el nuevo autor del libro:");
+            String author = sc.nextLine();
+            System.out.println("Ingrese si el libro está disponible (true/false):");
+            boolean isAvailable = Boolean.parseBoolean(sc.nextLine());
+
+            book.setTitle(title);
+            book.setYear(year);
+            book.setAuthor(author);
+            book.setAvailable(isAvailable);
+        } else {
+            System.out.println("Libro no encontrado");
+        }
+    }
+
+    public static void deleteBook(String id) {
+        Book book = findBook(id);
+        if (book != null) {
+            books.remove(book);
+            System.out.println("Libro eliminado");
+        } else {
+            System.out.println("Libro no encontrado");
+        }
+    }
 
     public static void main(String[] args) {
 
