@@ -189,7 +189,20 @@ public class Main {
         }
         System.out.println("Préstamo no encontrado");
     }
-    
+    static void listLoans() {
+        System.out.println("Lista de préstamos");
+        if (loans.isEmpty()) {
+            System.out.println("No hay préstamos registrados");
+        } else {
+            for (Loans loan : loans) {
+                System.out.println("ID del préstamo: " + loan.getLoanId() +
+                                   ", Cliente: " + loan.getClient().getName() +
+                                   ", Libro: " + loan.getBook().getTitle() +
+                                   ", Fecha: " + loan.getDate() +
+                                   ", Estado: " + loan.getStatus());
+            }
+        }
+    }
 
     public static void main(String[] args) {
 
