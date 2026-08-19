@@ -65,6 +65,16 @@ public class Main {
         }
     }
 
+    public static void Delete(String id) {
+        Client client = findClientById(id);
+        if (client != null) {
+            clients.remove(client);
+            System.out.println("Cliente eliminado");
+        } else {
+            System.out.println("Cliente no encontrado");
+        }
+    }
+
 
 
     public static void main(String[] args) {
