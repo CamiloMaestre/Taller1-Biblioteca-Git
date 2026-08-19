@@ -8,6 +8,7 @@ public class Main {
     static ArrayList<Client> clients = new ArrayList<>();
     static Scanner sc = new Scanner(System.in);
     static ArrayList<Book> books = new ArrayList<>();
+    static ArrayList<Loans> loans = new ArrayList<>();
 
     static void addClient() {
         System.out.println("Ingrese el ID del cliente:");
@@ -147,6 +148,34 @@ public class Main {
         } else {
             System.out.println("Libro no encontrado");
         }
+    }
+
+    // Crud de préstamos
+
+    static void createLoan() {
+        System.out.println("Ingrese el ID del préstamo:");
+        String loanId = sc.nextLine();
+        System.out.println("Ingrese el ID del cliente:");
+        String clientId = sc.nextLine();
+        Client client = findClientById(clientId);
+        if (client == null) {
+            System.out.println("Cliente no encontrado");
+            return;
+        }
+        System.out.println("Ingrese el código del libro:");
+        String bookCode = sc.nextLine();
+        Book book = findBook(bookCode);
+        if (book == null) {
+            System.out.println("Libro no encontrado");
+            return;
+        }
+        if (!book.isAvailable()) {
+            System.out.println("El libro no está disponible");
+            return;
+        }
+        Loans loan = new Loans(loanId, client, book);
+        loans.add(loan);
+        book.setAvailable(false);
     }
 
     public static void main(String[] args) {

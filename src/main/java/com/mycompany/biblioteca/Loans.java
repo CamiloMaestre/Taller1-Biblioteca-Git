@@ -17,7 +17,7 @@ public class Loans {
             this.date = LocalDate.now();
             this.status = "PRESTADO";
         }
-        
+
         public String getLoanId() {
             return loanId;
         }
