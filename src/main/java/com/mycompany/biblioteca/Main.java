@@ -32,9 +32,9 @@ public class Main {
         else{
             for(Client client : clients){
                 System.out.println("ID: " + client.getId() +
-                                   ", Nombre: " + client.getName() +
-                                   ", Celular: " + client.getCellphone() +
-                                   ", Correo: " + client.getEmail());
+                        ", Nombre: " + client.getName() +
+                        ", Celular: " + client.getCellphone() +
+                        ", Correo: " + client.getEmail());
             }
         }
     }
@@ -49,7 +49,9 @@ public class Main {
 
     }
 
-    public static void Update(String id) {
+    public static void Update() {
+        System.out.println("Ingrese el ID del cliente a actualizar:");
+        String id = sc.nextLine();
         Client client = findClientById(id);
         if (client != null) {
             System.out.println("Ingrese el nuevo nombre del cliente:");
@@ -67,7 +69,9 @@ public class Main {
         }
     }
 
-    public static void Delete(String id) {
+    public static void Delete() {
+        System.out.println("Ingrese el ID del cliente a eliminar:");
+        String id = sc.nextLine();
         Client client = findClientById(id);
         if (client != null) {
             clients.remove(client);
@@ -102,10 +106,10 @@ public class Main {
         } else {
             for (Book book : books) {
                 System.out.println("Código: " + book.getCode() +
-                                   ", Título: " + book.getTitle() +
-                                   ", Año: " + book.getYear() +
-                                   ", Autor: " + book.getAuthor() +
-                                   ", Disponible: " + book.isAvailable());
+                        ", Título: " + book.getTitle() +
+                        ", Año: " + book.getYear() +
+                        ", Autor: " + book.getAuthor() +
+                        ", Disponible: " + book.isAvailable());
             }
         }
     }
@@ -119,7 +123,9 @@ public class Main {
         return null;
     }
 
-    public static void updateBook(String id) {
+    public static void updateBook() {
+        System.out.println("Ingrese el código del libro a actualizar:");
+        String id = sc.nextLine();
         Book book = findBook(id);
         if (book != null) {
             System.out.println("Ingrese el nuevo título del libro:");
@@ -140,7 +146,9 @@ public class Main {
         }
     }
 
-    public static void deleteBook(String id) {
+    public static void deleteBook() {
+        System.out.println("Ingrese el código del libro a eliminar:");
+        String id = sc.nextLine();
         Book book = findBook(id);
         if (book != null) {
             books.remove(book);
@@ -178,7 +186,9 @@ public class Main {
         book.setAvailable(false);
     }
 
-    public static void returnBook(String loanId) {
+    public static void returnBook() {
+        System.out.println("Ingrese el ID del préstamo a devolver:");
+        String loanId = sc.nextLine();
         for (Loans loan : loans) {
             if (loan.getLoanId().equals(loanId)) {
                 loan.setStatus("DEVUELTO");
@@ -196,15 +206,66 @@ public class Main {
         } else {
             for (Loans loan : loans) {
                 System.out.println("ID del préstamo: " + loan.getLoanId() +
-                                   ", Cliente: " + loan.getClient().getName() +
-                                   ", Libro: " + loan.getBook().getTitle() +
-                                   ", Fecha: " + loan.getDate() +
-                                   ", Estado: " + loan.getStatus());
+                        ", Cliente: " + loan.getClient().getName() +
+                        ", Libro: " + loan.getBook().getTitle() +
+                        ", Fecha: " + loan.getDate() +
+                        ", Estado: " + loan.getStatus());
             }
         }
     }
 
     public static void main(String[] args) {
 
+        // Aquí puedes agregar un menú para interactuar con el sistema de biblioteca
+        int option = 0;
+
+        do {
+            System.out.println("\n=================================");
+            System.out.println("   SISTEMA DE GESTIÓN BIBLIOTECA ");
+            System.out.println("=================================");
+            System.out.println("1.  Agregar Cliente");
+            System.out.println("2.  Listar Clientes");
+            System.out.println("3.  Actualizar Cliente");
+            System.out.println("4.  Eliminar Cliente");
+            System.out.println("---------------------------------");
+            System.out.println("5.  Agregar Libro");
+            System.out.println("6.  Listar Libros");
+            System.out.println("7.  Actualizar Libro");
+            System.out.println("8.  Eliminar Libro");
+            System.out.println("---------------------------------");
+            System.out.println("9.  Registrar Préstamo");
+            System.out.println("10. Listar Préstamos");
+            System.out.println("11. Devolver Libro");
+            System.out.println("---------------------------------");
+            System.out.println("12. Salir");
+            System.out.println("=================================");
+            System.out.print("Seleccione una opción: ");
+
+            try {
+                option = Integer.parseInt(sc.nextLine());
+            } catch (NumberFormatException e) {
+                option = -1;
+            }
+
+            switch (option) {
+                case 1: addClient(); break;
+                case 2: ListClients(); break;
+                case 3: Update(); break;
+                case 4: Delete(); break;
+                case 5: createBook(); break;
+                case 6: listBooks(); break;
+                case 7: updateBook(); break;
+                case 8: deleteBook(); break;
+                case 9: createLoan(); break;
+                case 10: listLoans(); break;
+                case 11: returnBook(); break;
+                case 12:
+                    System.out.println("\n¡Saliendo del sistema... Hasta luego!");
+                    break;
+                default:
+                    System.out.println("Opción inválida. Intente de nuevo.");
+            }
+        } while (option != 12);
     }
 }
+
