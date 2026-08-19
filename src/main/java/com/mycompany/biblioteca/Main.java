@@ -178,6 +178,19 @@ public class Main {
         book.setAvailable(false);
     }
 
+    public static void returnBook(String loanId) {
+        for (Loans loan : loans) {
+            if (loan.getLoanId().equals(loanId)) {
+                loan.setStatus("DEVUELTO");
+                loan.getBook().setAvailable(true);
+                System.out.println("Libro devuelto");
+                return;
+            }
+        }
+        System.out.println("Préstamo no encontrado");
+    }
+    
+
     public static void main(String[] args) {
 
     }
