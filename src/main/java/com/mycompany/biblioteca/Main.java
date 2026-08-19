@@ -37,7 +37,7 @@ public class Main {
         }
     }
 
-    static void Client findClientById(String id) {
+    public static Client findClientById(String id) {
         for (Client client : clients) {
             if (client.getId().equals(id)) {
                 return client;
@@ -46,7 +46,24 @@ public class Main {
         return null;
 
     }
-    
+
+    public static void Update(String id) {
+        Client client = findClientById(id);
+        if (client != null) {
+            System.out.println("Ingrese el nuevo nombre del cliente:");
+            String name = sc.nextLine();
+            System.out.println("Ingrese el nuevo celular del cliente:");
+            String cellphone = sc.nextLine();
+            System.out.println("Ingrese el nuevo correo electrónico del cliente:");
+            String email = sc.nextLine();
+
+            client.setName(name);
+            client.setCellphone(cellphone);
+            client.setEmail(email);
+        } else {
+            System.out.println("Cliente no encontrado");
+        }
+    }
 
 
 
