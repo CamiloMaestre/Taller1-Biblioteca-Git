@@ -118,6 +118,26 @@ public class Main {
         return null;
     }
 
+    public static void updateBook(String id) {
+        Book book = findBook(id);
+        if (book != null) {
+            System.out.println("Ingrese el nuevo título del libro:");
+            String title = sc.nextLine();
+            System.out.println("Ingrese el nuevo año del libro:");
+            String year = sc.nextLine();
+            System.out.println("Ingrese el nuevo autor del libro:");
+            String author = sc.nextLine();
+            System.out.println("Ingrese si el libro está disponible (true/false):");
+            boolean isAvailable = Boolean.parseBoolean(sc.nextLine());
+
+            book.setTitle(title);
+            book.setYear(year);
+            book.setAuthor(author);
+            book.setAvailable(isAvailable);
+        } else {
+            System.out.println("Libro no encontrado");
+        }
+    }
 
 
     public static void main(String[] args) {
