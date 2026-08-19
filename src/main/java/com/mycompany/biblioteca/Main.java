@@ -94,6 +94,22 @@ public class Main {
         books.add(book);
     }
 
+    static void listBooks() {
+        System.out.println("Lista de libros");
+        if (books.isEmpty()) {
+            System.out.println("No hay libros registrados");
+        } else {
+            for (Book book : books) {
+                System.out.println("Código: " + book.getCode() +
+                                   ", Título: " + book.getTitle() +
+                                   ", Año: " + book.getYear() +
+                                   ", Autor: " + book.getAuthor() +
+                                   ", Disponible: " + book.isAvailable());
+            }
+        }
+    }
+    
+
 
 
 
