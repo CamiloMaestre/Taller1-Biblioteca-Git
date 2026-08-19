@@ -8,6 +8,7 @@ public class Main {
     static ArrayList<Client> clients = new ArrayList<>();
     static Scanner sc = new Scanner(System.in);
     static ArrayList<Book> books = new ArrayList<>();
+    static ArrayList<Loans> loans = new ArrayList<>();
 
     static void addClient() {
         System.out.println("Ingrese el ID del cliente:");
@@ -146,6 +147,60 @@ public class Main {
             System.out.println("Libro eliminado");
         } else {
             System.out.println("Libro no encontrado");
+        }
+    }
+
+    // Crud de préstamos
+
+    static void createLoan() {
+        System.out.println("Ingrese el ID del préstamo:");
+        String loanId = sc.nextLine();
+        System.out.println("Ingrese el ID del cliente:");
+        String clientId = sc.nextLine();
+        Client client = findClientById(clientId);
+        if (client == null) {
+            System.out.println("Cliente no encontrado");
+            return;
+        }
+        System.out.println("Ingrese el código del libro:");
+        String bookCode = sc.nextLine();
+        Book book = findBook(bookCode);
+        if (book == null) {
+            System.out.println("Libro no encontrado");
+            return;
+        }
+        if (!book.isAvailable()) {
+            System.out.println("El libro no está disponible");
+            return;
+        }
+        Loans loan = new Loans(loanId, client, book);
+        loans.add(loan);
+        book.setAvailable(false);
+    }
+
+    public static void returnBook(String loanId) {
+        for (Loans loan : loans) {
+            if (loan.getLoanId().equals(loanId)) {
+                loan.setStatus("DEVUELTO");
+                loan.getBook().setAvailable(true);
+                System.out.println("Libro devuelto");
+                return;
+            }
+        }
+        System.out.println("Préstamo no encontrado");
+    }
+    static void listLoans() {
+        System.out.println("Lista de préstamos");
+        if (loans.isEmpty()) {
+            System.out.println("No hay préstamos registrados");
+        } else {
+            for (Loans loan : loans) {
+                System.out.println("ID del préstamo: " + loan.getLoanId() +
+                                   ", Cliente: " + loan.getClient().getName() +
+                                   ", Libro: " + loan.getBook().getTitle() +
+                                   ", Fecha: " + loan.getDate() +
+                                   ", Estado: " + loan.getStatus());
+            }
         }
     }
 
