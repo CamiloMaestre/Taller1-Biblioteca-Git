@@ -139,6 +139,15 @@ public class Main {
         }
     }
 
+    public static void deleteBook(String id) {
+        Book book = findBook(id);
+        if (book != null) {
+            books.remove(book);
+            System.out.println("Libro eliminado");
+        } else {
+            System.out.println("Libro no encontrado");
+        }
+    }
 
     public static void main(String[] args) {
 
