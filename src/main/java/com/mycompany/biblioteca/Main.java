@@ -7,6 +7,7 @@ public class Main {
 
     static ArrayList<Client> clients = new ArrayList<>();
     static Scanner sc = new Scanner(System.in);
+    static ArrayList<Book> books = new ArrayList<>();
 
     static void addClient() {
         System.out.println("Ingrese el ID del cliente:");
@@ -74,6 +75,25 @@ public class Main {
             System.out.println("Cliente no encontrado");
         }
     }
+
+    //Crud de libros
+
+    static void createBook() {
+        System.out.println("Ingrese el código del libro:");
+        String code = sc.nextLine();
+        System.out.println("Ingrese el título del libro:");
+        String title = sc.nextLine();
+        System.out.println("Ingrese el año del libro:");
+        String year = sc.nextLine();
+        System.out.println("Ingrese el autor del libro:");
+        String author = sc.nextLine();
+        System.out.println("Ingrese si el libro está disponible (true/false):");
+        boolean isAvailable = Boolean.parseBoolean(sc.nextLine());
+
+        Book book = new Book(code, title, year, author, isAvailable);
+        books.add(book);
+    }
+
 
 
 
